@@ -91,7 +91,7 @@ mobil_tersedia = {<br>
     'Innova barong diesel': 550000,<br>
     'Honda BRV 2022': 730000<br>}<br>
 register_customer = {}<br>
-rental_data = {}<br>
+rental_data = {}<br><br>
 mobil_tersedia: Dictionary ini menyimpan daftar mobil yang tersedia untuk disewa, dengan nama mobil sebagai kunci dan tarif sewa per hari (dalam rupiah) sebagai nilai.<br>
 register_customer: Dictionary ini akan digunakan untuk menyimpan data customer yang telah melakukan registrasi.<br>
 rental_data: Dictionary ini menyimpan informasi penyewaan mobil oleh customer, seperti nama penyewa, mobil yang disewa, lama sewa, dan total biaya.
@@ -103,7 +103,7 @@ def nampilkan_menu():
     table.add_row(["1.", "Pegawai"])<br>
     table.add_row(["2.", "Customer"])<br>
     table.add_row(["3.", "Keluar"])<br>
-    print(table)<br>
+    print(table)<br><br>
      Fungsi ini dibuat buat nampilkan menu utama dengan pilihan Pegawai, Customer, atau Keluar dalam bentuk tabel menggunakan PrettyTable.
 <br><br>
 baris 29-39:<br><br>
@@ -115,7 +115,7 @@ def login_pegawai():<br>
         return True<br>
     else:<br>
         print("Duh kok bisanya lupa")<br>
-        return False<br>
+        return False<br><br>
 fungsi ini dibuat untuk minta pegawai masukkan nama dan password.<br> 
 Jika benar (nama "Ghen" dan password "1610"), login berhasil dan akan dikembalikan nilai True.<br>
 Jika salah, muncul pesan error dan dikembalikan False.
@@ -132,7 +132,7 @@ def register_customer_fungsi():<br>
         'nik': nik<br>
     }<br>
     print("\nRegistrasi berhasil!, sekarang login pakai data yang sama.\n")<br>
-    return nama, alamat, nik<br> 
+    return nama, alamat, nik<br><br>
 Fungsi ini buat customer untuk melakukan registrasi dengan memasukkan nama, alamat, dan NIK KTP. Habis data dimasukkan,<br> data customer disimpan di dictionary register_customer. Fungsi ini juga mengembalikan data customer yang terdaftar (nama, alamat, nik).
 <br><br>
 Baris 59-70:<br><br>
@@ -146,7 +146,7 @@ def login_customer(nama_terdaftar, alamat_terdaftar, nik_terdaftar):<br>
         return True<br>
     else:<br>
         print("Duh salah\n")<br>
-        return False<br>
+        return False<br><br>
 Setelah registrasi, customer harus login kembali menggunakan data yang sama (nama, alamat, dan NIK).<br> Fungsi ini mencocokkan input customer dengan data yang terdaftar dan mengembalikan nilai True jika login berhasil.
 <br><br>
 Baris 73-78:<br><br>
@@ -155,7 +155,7 @@ def tampilkan_mobil():<br>
     table.field_names = ["No", "Nama Mobil", "Tarif per Hari (Rp)"]<br>
     for i, (mobil, tarif) in enumerate(mobil_tersedia.items(), start=1):<br>
         table.add_row([i, mobil, tarif])<br>
-    print(table)<br>
+    print(table)<br><br>
   Untuk nampilkan daftar mobil yang tersedia dan tarif per hari dalam bentuk tabel pakai prettytable.<br>
   Setiap mobil dikasih nomor urut.
   <br><br>
@@ -176,7 +176,7 @@ def tampilkan_mobil():<br>
         del mobil_tersedia[mobil_pilihan]<br>
         print(f"Anda telah memilih {mobil_pilihan} untuk {lama_sewa} hari. Total biaya: Rp{biaya_total}")<br>
     else:<br>
-        print("Mobil tidak tersedia. Kembali ke menu.")<br>
+        print("Mobil tidak tersedia. Kembali ke menu.")<br><br>
 fungsi ini dipakai untuk proses penyewaan mobil. Customer milih mobil berdasarkan nomor urut,<br>
 lalu menentukan lama penyewaan. Total biaya dihitung berdasarkan tarif harian.<br>
 Data penyewaan disimpan di rental_data dan mobil dihapus dari mobil_tersedia.
@@ -190,6 +190,47 @@ def kembalikan_mobil(nama_customer):<br>
         del rental_data[nama_customer]<br>
         print("Pengembalian berhasil. Mobil telah kembali tersedia.")<br>
     else:<br>
-        print("Anda belum menyewa mobil. Kembali ke menu utama.")<br>
+        print("Anda belum menyewa mobil. Kembali ke menu utama.")<br>,<br>
 Customer bisa ngembalikan mobil yang sudah disewa. Mobil yang dikembalikan ditambahkan kembali<br> 
 ke mobil_tersedia dan data rental dihapus dari rental_data.
+<br><br>
+Baris 122-164:<br><br>
+def customer_menu():<br>
+    while True:<br>
+    table = PrettyTable()<br>
+        table.field_names = ["Pilihan", "Keterangan"]<br>
+        table.add_row(["1.", "Ingin Melakukan Rental"])<br>
+        table.add_row(["2.", "Mengembalikan Mobil"])<br>
+        table.add_row(["3.", "Tidak Melakukan Rental"])<br>
+        print(table)<br>
+        pilihan = int(input("Apa yang ingin Anda lakukan? "))<br>
+        if pilihan == 1:<br>
+        nama_terdaftar, alamat_terdaftar, nik_terdaftar = register_customer_fungsi()<br>
+        f login_customer(nama_terdaftar, alamat_terdaftar, nik_terdaftar):<br>
+                print("Proses rental dapat dilanjutkan.\n")<br>
+                table = PrettyTable()<br>
+                table.field_names = ["Pilihan", "Keterangan"]<br>
+                table.add_row(["1.", "Lihat Daftar Mobil dan Tarif"])<br>
+                print(table)<br><br>
+                opsi = int(input("Masukkan pilihan: "))<br>
+                if opsi == 1:<br>
+                    sewa_mobil(nama_terdaftar)<br>
+                else:<br>
+                    print("Pilihan tidak valid.")<br>
+                break<br>
+            else:<br>
+                break<br>
+                 elif pilihan == 2:<br>
+            print("Anda memilih untuk mengembalikan mobil.")<br>
+            nama = input("Masukkan nama anda untuk pengembalian: ")<br>
+            kembalikan_mobil(nama)<br>
+            elif pilihan == 3:<br>
+            print("Anda memilih untuk tidak melakukan rental. Kembali ke menu utama.")<br>
+            break<br>
+        else:<br>
+            print("Pilihan tidak valid. Silakan coba lagi.")<br><br>
+    Menu untuk customer yang menawarkan pilihan untuk melakukan rental, mengembalikan mobil, atau keluar. Customer<br>
+    yang ingin rental harus registrasi dan login terlebih dahulu.
+
+
+        
