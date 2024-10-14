@@ -231,6 +231,95 @@ def customer_menu():<br>
             print("Pilihan tidak valid. Silakan coba lagi.")<br><br>
     Menu untuk customer yang menawarkan pilihan untuk melakukan rental, mengembalikan mobil, atau keluar. Customer<br>
     yang ingin rental harus registrasi dan login terlebih dahulu.
+<br><br>
+Baris 167-175<br><br>
+def lihat_penyewa():<br>
+    if rental_data:<br>
+        table = PrettyTable()<br>
+        table.field_names = ["Nama", "Mobil", "Lama Sewa (Hari)", "Total Biaya (Rp)"]<br>
+        for nama, data in rental_data.items():<br>
+            table.add_row([nama, data['mobil'], data['lama'], data['biaya_total']])<br>
+        print(table)<br>
+    else:<br>
+        print("Belum ada yang menyewa mobil.")<br><br>
+Fungsi ini digunakan sama pegawai untuk melihat daftar penyewa mobil dan detail sewa mereka (mobil, lama sewa, dan total biaya).
+<br><br>
+Baris 178-183<br><br>
+def tambah_mobil():<br>
+    mobil_baru = input("Masukkan nama mobil yang ingin ditambahkan: ")<br>
+    tarif_baru = int(input("Masukkan tarif per hari (Rp): "))<br>
+    mobil_tersedia[mobil_baru] = tarif_baru<br>
+    print(f"Mobil {mobil_baru} dengan tarif Rp{tarif_baru} berhasil ditambahkan.")<br>
+    tampilkan_mobil()<br><br>
+Memungkinkan pegawai untuk menambahkan mobil baru ke dalam daftar mobil yang tersedia,<br>
+dengan memasukkan nama mobil dan tarif sewanya per hari.
+<br><br>
+Baris 186-195<br><br>
+def hapus_mobil():<br>
+    tampilkan_mobil()<br>
+    mobil_hapus = int(input("Masukkan nomor mobil yang ingin dihapus: "))<br>
+    if 1 <= mobil_hapus <= len(mobil_tersedia):<br>
+        mobil_pilihan = list(mobil_tersedia.keys())[mobil_hapus - 1]<br>
+        del mobil_tersedia[mobil_pilihan]<br>
+        print(f"Mobil {mobil_pilihan} berhasil dihapus.")<br>
+        tampilkan_mobil()<br>
+    else:<br>
+        print("Pilihan tidak valid.")<br><br>
+Fungsi Hapus Mobil untuk pegawai untuk menghapus mobil dari daftar yang tersedia berdasarkan nomor uru<br>
+yang ditampilkan. Setelah mobil dihapus, daftar mobil yang tersedia diperbarui.
+<br><br>
+Baris 198-219<br><br>
+def pegawai_menu():<br>
+    while True:<br>
+        table = PrettyTable()<br>
+        table.field_names = ["Pilihan", "Keterangan"]<br>
+        table.add_row(["1.", "Lihat Penyewa"])<br>
+        table.add_row(["2.", "Menambahkan Mobil"])<br>
+        table.add_row(["3.", "Hapus Mobil"])<br>
+        table.add_row(["4.", "Keluar"])<br>
+        print(table)<br>
+        pilihan = int(input("Masukkan pilihan: "))<br>
+        if pilihan == 1:<br>
+            lihat_penyewa()<br>
+        elif pilihan == 2:<br>
+            tambah_mobil()<br>
+        elif pilihan == 3:<br>
+            hapus_mobil()<br>
+        elif pilihan == 4:<br>
+            print("Kembali ke menu utama.")<br>
+            break<br>
+        else:<br>
+            print("Pilihan tidak valid.")<br><br>
+    Menampilkan pilihan untuk melihat penyewa, menambah mobil, menghapus mobil, atau keluar dari menu pegawai.
+    <br><br>
+    Baris 222-242<br><br>
+    def main():<br>
+    while True:<br>
+        print("Selamat Datang Di Penyewaan Mobil G16\n")<br>
+        nampilkan_menu()<br>
+        if pilihan == 1:<br>
+            if login_pegawai():<br>  
+                pegawai_menu()<br>
+        elif pilihan == 2:<br>
+            customer_menu()<br>
+        elif pilihan == 3:<br>
+            print(50*"=")<br>
+            print(50*"=")<br>
+            print("                    Makasih ya.")<br>
+            print(50*"=")<br>
+            print(50*"=")<br>
+            exit()<br>
+        else:<br>
+            print("Pilihan ga valid. coba lagi!")<br><br>
+Main Program ini untuk nampilkan menu utama, di mana dapat memilih antara pegawai,<br>
+customer, atau keluar. Jika memilih pegawai, maka login pegawai dijalankan. Jika login berhasil,,br>
+pegawai dapat mengakses menu pegawai. Jika customer dipilih, maka customer menu ditampilkan.<br>
+Program akan berhenti jika memilih untuk keluar.
+
+
+
+    
+
 
 
         
